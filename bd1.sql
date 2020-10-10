@@ -2361,10 +2361,10 @@ if (object_id('Clientes')) is not null
  insert into Clientes values ('Lopez Marcos','Colon 111','Córdoba',1);
  insert into Clientes values ('Perez Ana','San Martin 222','Cruz del Eje',1);
  insert into Clientes values ('Garcia Juan','Rivadavia 333','Villa Maria',1);
- insert into clientes values ('Perez Luis','Sarmiento 444','Rosario',2);
- insert into clientes values ('Gomez Ines','San Martin 666','Santa Fe',2);
- insert into clientes values ('Torres Fabiola','Alem 777','La Plata',4);
- insert into clientes values ('Garcia Luis','Sucre 475','Santa Rosa',5);
+ insert into Clientes values ('Perez Luis','Sarmiento 444','Rosario',2);
+ insert into Clientes values ('Gomez Ines','San Martin 666','Santa Fe',2);
+ insert into Clientes values ('Torres Fabiola','Alem 777','La Plata',4);
+ insert into Clientes values ('Garcia Luis','Sucre 475','Santa Rosa',5);
 
  select c.Nombre,Domicilio,Ciudad, p.Nombre
   from Clientes as c
@@ -3843,7 +3843,7 @@ if object_id('empleados') is not null
        when 'Friday' then 'viernes'
        when 'Saturday' then 'sábado'
        when 'Sunday' then 'domingo'
-      end--case
+      end
     end--si es una fecha válida
     return @nombre
  end;
