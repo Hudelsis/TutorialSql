@@ -2993,175 +2993,175 @@ if (object_id('Ciudades')) is not null
   ----Problema 1 y 2 de Concepto 57------
 
 -----Problema 1-------
- if object_id('inscriptos') is not null
-  drop table inscriptos;
- if object_id('socios') is not null
-  drop table socios;
+ if object_id('Inscriptos') is not null
+  drop table Inscriptos;
+ if object_id('Socios') is not null
+  drop table Socios;
 
- create table socios(
-  numero int identity,
-  documento char(8),
-  nombre varchar(30),
-  domicilio varchar(30),
-  primary key (numero)
+ create table Socios(
+  Numero int identity,
+  Documento char(8),
+  Nombre varchar(30),
+  Domicilio varchar(30),
+  primary key (Numero)
  );
  
- create table inscriptos (
-  numerosocio int not null,
-  deporte varchar(20) not null,
-  cuotas tinyint
-  constraint CK_inscriptos_cuotas
-   check (cuotas>=0 and cuotas<=10)
+ create table Inscriptos (
+  Numerosocio int not null,
+  Deporte varchar(20) not null,
+  Cuotas tinyint
+  constraint CK_Inscriptos_Cuotas
+   check (Cuotas>=0 and Cuotas<=10)
   constraint DF_inscriptos_cuotas default 0,
-  primary key(numerosocio,deporte),
-  constraint FK_inscriptos_socio
-   foreign key (numerosocio)
-   references socios(numero)
+  primary key(Numerosocio,Deporte),
+  constraint FK_Inscriptos_Socio
+   foreign key (Numerosocio)
+   references Socios(Numero)
    on update cascade
    on delete cascade,
  );
 
- insert into socios values('23333333','Alberto Paredes','Colon 111');
- insert into socios values('24444444','Carlos Conte','Sarmiento 755');
- insert into socios values('25555555','Fabian Fuentes','Caseros 987');
- insert into socios values('26666666','Hector Lopez','Sucre 344');
+ insert into Socios values('23333333','Alberto Paredes','Colon 111');
+ insert into Socios values('24444444','Carlos Conte','Sarmiento 755');
+ insert into Socios values('25555555','Fabian Fuentes','Caseros 987');
+ insert into Socios values('26666666','Hector Lopez','Sucre 344');
 
- insert into inscriptos values(1,'tenis',1);
- insert into inscriptos values(1,'basquet',2);
- insert into inscriptos values(1,'natacion',1);
- insert into inscriptos values(2,'tenis',9);
- insert into inscriptos values(2,'natacion',1);
- insert into inscriptos values(2,'basquet',default);
+ insert into Inscriptos values(1,'tenis',1);
+ insert into Inscriptos values(1,'basquet',2);
+ insert into Inscriptos values(1,'natacion',1);
+ insert into Inscriptos values(2,'tenis',9);
+ insert into Inscriptos values(2,'natacion',1);
+ insert into Inscriptos values(2,'basquet',default);
  insert into inscriptos values(2,'futbol',2);
- insert into inscriptos values(3,'tenis',8);
- insert into inscriptos values(3,'basquet',9);
- insert into inscriptos values(3,'natacion',0);
- insert into inscriptos values(4,'basquet',10);
+ insert into Inscriptos values(3,'tenis',8);
+ insert into Inscriptos values(3,'basquet',9);
+ insert into Inscriptos values(3,'natacion',0);
+ insert into Inscriptos values(4,'basquet',10);
 
- select numero,nombre,deporte
-  from socios as s
-  join inscriptos as i
-  on numerosocio=numero;
+ select Numero,Nombre,Deporte
+  from Socios as s
+  join Inscriptos as i
+  on Numerosocio=Numero;
 
- select nombre
-  from socios
-  join inscriptos as i
-  on numero=numerosocio
-  where deporte='natacion' and 
-  numero= any
-  (select numerosocio
-    from inscriptos as i
-    where deporte='tenis');
+ select Nombre
+  from Socios
+  join Inscriptos as i
+  on Numero=Numerosocio
+  where Deporte='natacion' and 
+  Numero= any
+  (select Numerosocio
+    from Inscriptos as i
+    where Deporte='tenis');
 
- select deporte
-  from inscriptos as i
-  where numerosocio=1 and
-  deporte= any
-   (select deporte
-    from inscriptos as i
-    where numerosocio=2);
+ select Deporte
+  from Inscriptos as i
+  where Numerosocio=1 and
+  Deporte= any
+   (select Deporte
+    from Inscriptos as i
+    where Numerosocio=2);
 
- select i1.deporte
-  from inscriptos as i1
-  join inscriptos as i2
-  on i1.deporte=i2.deporte
-  where i1.numerosocio=1 and
-  i2.numerosocio=2;
+ select i1.Deporte
+  from Inscriptos as i1
+  join Inscriptos as i2
+  on i1.Deporte=i2.deporte
+  where i1.Numerosocio=1 and
+  i2.Numerosocio=2;
 
- select deporte
-  from inscriptos as i
-  where numerosocio=2 and
-  cuotas>any
-   (select cuotas
-    from inscriptos
-    where numerosocio=1);
+ select Deporte
+  from Inscriptos as i
+  where Numerosocio=2 and
+  Cuotas>any
+   (select Cuotas
+    from Inscriptos
+    where Numerosocio=1);
 
- select deporte
-  from inscriptos as i
-  where numerosocio=2 and
-  cuotas>all
-   (select cuotas
-    from inscriptos
-    where numerosocio=1);
+ select Deporte
+  from Inscriptos as i
+  where Numerosocio=2 and
+  Cuotas>all
+   (select Cuotas
+    from Inscriptos
+    where Numerosocio=1);
 
- delete from inscriptos
-  where numerosocio=any
-   (select numerosocio 
-    from inscriptos
-    where cuotas=0);
+ delete from Inscriptos
+  where Numerosocio=any
+   (select Numerosocio 
+    from Inscriptos
+    where Cuotas=0);
 
 	----Problema 1 y 2 de Concepto 58------
 
 -----Problema 1-------
 
 
-if object_id('inscriptos') is not null
-  drop table inscriptos;
- if object_id('socios') is not null
-  drop table socios;
+if object_id('Inscriptos') is not null
+  drop table Inscriptos;
+ if object_id('Socios') is not null
+  drop table Socios;
 
- create table socios(
-  numero int identity,
-  documento char(8),
-  nombre varchar(30),
-  domicilio varchar(30),
-  primary key (numero)
+ create table Socios(
+  Numero int identity,
+  Documento char(8),
+  Nombre varchar(30),
+  Domicilio varchar(30),
+  primary key (Numero)
  );
  
- create table inscriptos (
-  numerosocio int not null,
-  deporte varchar(20) not null,
-  cuotas tinyint
-  constraint CK_inscriptos_cuotas
-   check (cuotas>=0 and cuotas<=10)
-  constraint DF_inscriptos_cuotas default 0,
-  primary key(numerosocio,deporte),
-  constraint FK_inscriptos_socio
-   foreign key (numerosocio)
-   references socios(numero)
+ create table Inscriptos (
+  Numerosocio int not null,
+  Deporte varchar(20) not null,
+  Cuotas tinyint
+  constraint CK_Inscriptos_Cuotas
+   check (Cuotas>=0 and Cuotas<=10)
+  constraint DF_Inscriptos_Cuotas default 0,
+  primary key(Numerosocio,Deporte),
+  constraint FK_Inscriptos_Socio
+   foreign key (Numerosocio)
+   references Socios(Numero)
    on update cascade
    on delete cascade,
  );
 
- insert into socios values('23333333','Alberto Paredes','Colon 111');
- insert into socios values('24444444','Carlos Conte','Sarmiento 755');
- insert into socios values('25555555','Fabian Fuentes','Caseros 987');
- insert into socios values('26666666','Hector Lopez','Sucre 344');
+ insert into Socios values('23333333','Alberto Paredes','Colon 111');
+ insert into Socios values('24444444','Carlos Conte','Sarmiento 755');
+ insert into Socios values('25555555','Fabian Fuentes','Caseros 987');
+ insert into Socios values('26666666','Hector Lopez','Sucre 344');
 
- insert into inscriptos values(1,'tenis',1);
- insert into inscriptos values(1,'basquet',2);
- insert into inscriptos values(1,'natacion',1);
- insert into inscriptos values(2,'tenis',9);
- insert into inscriptos values(2,'natacion',1);
- insert into inscriptos values(2,'basquet',default);
- insert into inscriptos values(2,'futbol',2);
- insert into inscriptos values(3,'tenis',8);
- insert into inscriptos values(3,'basquet',9);
- insert into inscriptos values(3,'natacion',0);
- insert into inscriptos values(4,'basquet',10);
+ insert into Inscriptos values(1,'tenis',1);
+ insert into Inscriptos values(1,'basquet',2);
+ insert into Inscriptos values(1,'natacion',1);
+ insert into Inscriptos values(2,'tenis',9);
+ insert into Inscriptos values(2,'natacion',1);
+ insert into Inscriptos values(2,'basquet',default);
+ insert into Inscriptos values(2,'futbol',2);
+ insert into Inscriptos values(3,'tenis',8);
+ insert into Inscriptos values(3,'basquet',9);
+ insert into Inscriptos values(3,'natacion',0);
+ insert into Inscriptos values(4,'basquet',10);
 
- select nombre,domicilio,
+ select Nombre,Domicilio,
   (select count(*)
-    from inscriptos as i
-    where s.numero=i.numerosocio) as 'deportes'
- from socios as s;
+    from Inscriptos as i
+    where s.Numero=i.Numerosocio) as 'deportes'
+ from Socios as s;
 
- select nombre,
+ select Nombre,
   (select (count(*)*10)
-    from inscriptos as i
-    where s.numero=i.numerosocio) as total,
-  (select sum(i.cuotas)
-    from inscriptos as i
-    where s.numero=i.numerosocio) as pagas
- from socios as s;
+    from Inscriptos as i
+    where s.Numero=i.Numerosocio) as total,
+  (select sum(i.Cuotas)
+    from Inscriptos as i
+    where s.Numero=i.Numerosocio) as pagas
+ from Socios as s;
 
- select nombre,
-  count(i.deporte)*10 as total,
-  sum(i.cuotas) as pagas
-  from socios as s
-  join inscriptos as i
-  on numero=numerosocio
-  group by nombre;
+ select Nombre,
+  count(i.Deporte)*10 as total,
+  sum(i.Cuotas) as pagas
+  from Socios as s
+  join Inscriptos as i
+  on Numero=Numerosocio
+  group by Nombre;
 
   ----Problema 1 y 2 de Concepto 59------
 
